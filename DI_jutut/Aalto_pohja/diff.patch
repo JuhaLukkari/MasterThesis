@@ -1,0 +1,88 @@
+diff --git aaltothesis.cls aaltothesis.cls
+index f3eb4f1..539f703 100644
+--- aaltothesis.cls
++++ aaltothesis.cls
+@@ -185,6 +185,7 @@
+ \newcommand*{\univ@rsity}{}%
+ \newcommand*{\sch@@l}{}%
+ \newcommand*{\thesissupervisorname}{}%
++\newcommand*{\thesissupervisorsname}{}%
+ \newcommand*{\thesissuperadvisorname}{}%
+ \newcommand*{\thesisadvisorname}{}%
+ \newcommand*{\thesisadvisorsname}{}%
+@@ -213,6 +214,7 @@
+  \IfEng{\MainLang}{%
+    %% Cover page stuff in English
+    \renewcommand*{\thesissupervisorname}{Thesis supervisor}%
++   \renewcommand*{\thesissupervisorsname}{Thesis supervisors}%
+    \renewcommand*{\thesissuperadvisorname}{Thesis supervisor and advisor}%
+    \renewcommand*{\thesisadvisorname}{Thesis advisor}%
+    \renewcommand*{\thesisadvisorsname}{Thesis advisors}%
+@@ -595,6 +597,32 @@
+                 {Give at most 2 advisors or hack the code.}}%
+  }%
+ }%
++
++\newcounter{supervisors}%
++\newcommand*{\sup@rvis@rA}{}%
++\newcommand*{\sup@rvis@rB}{}%
++\renewcommand*{\supervisor}[1]{% User command
++ \stepcounter{supervisors}%
++ \ifthenelse{\value{supervisors}=1}{%
++   \renewcommand*{\sup@rvis@rA}{#1}%
++ }{%
++ \ifthenelse{\value{supervisors}=2}{%
++   \renewcommand*{\sup@rvis@rB}{#1}%
++ }{\PackageError{aaltothesis}{Only 2 supervisors are allowed.}%
++   {Give at most 2 supervisors or hack the code.}}%
++ }%
++}%
++\newcommand*{\Sup@rvis@r}[1]{% internal macro
++ \ifthenelse{\equal{#1}{1}}{% One advisor
++   \sup@rvis@rA{}%
++ }{%
++ \ifthenelse{\equal{#1}{2}}{% Two advisors
++   \sup@rvis@rB{}%
++ }{%
++   \PackageError{aaltothesis}{Only 2 supervisors are allowed.}%
++                {Give at most 2 supervisors or hack the code.}}%
++ }%
++}%
+ %
+ %%
+ %% Two cover-related internal macros
+@@ -604,7 +632,9 @@
+    {\setcounter{advisors}{0}%
+     \thesissuperadvisorname:%
+    }{%
+-     \thesissupervisorname:%
++     \ifthenelse{\value{supervisors}=1}{\thesissupervisorname:}{%
++     \ifthenelse{\value{supervisors}>1}{\thesissupervisorsname:}{}%
++     }
+    }%
+ }%
+ %
+@@ -658,9 +688,20 @@
+   \ifthenelse{\boolean{BSc}\or\equal{\MainLang}{english}}{\dateandplace\par}{}%
+   \vspace{23mm}%
+   \noindent%
+-  \textbf{\cov@rsup@rvisor}\par%
+-  \vspace{1em}%
+-  \hspace{\coverindent}\sup@rvis@r\par%
++    
++  \ifthenelse{\value{supervisors}>0}{%
++   \vspace{2em}%
++   \noindent%
++   \textbf{\cov@rsup@rvisor}\par%
++   \vspace{1em}%
++   \hspace{\coverindent}\Sup@rvis@r{1}%
++  }{}%
++  \ifthenelse{\value{supervisors}>1}{%
++   \par%
++   \vspace{1em}%
++   \hspace{\coverindent}\Sup@rvis@r{2}%
++  }{}%  
++  
+   \ifthenelse{\value{advisors}>0}{%
+    \vspace{2em}%
+    \noindent%

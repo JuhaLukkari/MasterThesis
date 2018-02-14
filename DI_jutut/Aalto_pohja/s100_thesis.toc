@@ -1,0 +1,59 @@
+\select@language {english}
+\contentsline {section}{Abstract{} }{ii}{section*.1}
+\contentsline {section}{Abstract{} (in Finnish)}{iii}{section*.2}
+\contentsline {section}{Abstract{} (in Swedish)}{iv}{section*.3}
+\contentsline {section}{Preface}{v}{section*.4}
+\contentsline {section}{Contents}{vi}{section*.5}
+\contentsline {section}{Symbols and abbreviations}{viii}{section*.7}
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Increasing interest in space}{1}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Substantial proportion of failures in CubeSat missions}{1}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Suomi100 Cubesat}{2}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Research purpose and goals}{3}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Main questions and problems}{3}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Outlining the scope of research}{3}{subsection.1.6}
+\contentsline {section}{\numberline {2}Background}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Statistics of Cubesat failures}{5}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}Failure rates of CubeSats}{5}{subsubsection.2.1.1}
+\contentsline {subsubsection}{\numberline {2.1.2}Contribution of different subsystems to satellite failures}{7}{subsubsection.2.1.2}
+\contentsline {subsubsection}{\numberline {2.1.3}Need for system level functional testing}{8}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}Comparison of CubeSat failures to failures with larger spacecrafts}{9}{subsubsection.2.1.4}
+\contentsline {subsection}{\numberline {2.2}General testing practices}{9}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Methods of testing}{10}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Levels of testing}{10}{subsubsection.2.2.2}
+\contentsline {subsubsection}{\numberline {2.2.3}Types of testing}{11}{subsubsection.2.2.3}
+\contentsline {subsection}{\numberline {2.3}Industry established methods of testing}{13}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Traditional industry}{13}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Space Industry}{13}{subsubsection.2.3.2}
+\contentsline {subsection}{\numberline {2.4}Tools for automated functional system testing}{15}{subsection.2.4}
+\contentsline {subsubsection}{\numberline {2.4.1}Automated system and acceptance level testing frameworks}{15}{subsubsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.2}Robot Framework}{15}{subsubsection.2.4.2}
+\contentsline {subsection}{\numberline {2.5}Gomspace NanoEye 1U - Suomi100 satellite platform}{15}{subsection.2.5}
+\contentsline {section}{\numberline {3}Methods}{17}{section.3}
+\contentsline {subsection}{\numberline {3.1}Suomi100 satellite}{17}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Subsystems}{18}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Gomspace software}{20}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Software for radio payload}{22}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Satellite control software - CSP Client}{22}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}Automation of control and testing of the satellite}{23}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}API and communication layers for CSP Client software}{23}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Python libraries}{25}{subsubsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.3}Robot framework test suites}{28}{subsubsection.3.2.3}
+\contentsline {subsection}{\numberline {3.3}Test setups and environment simulation}{28}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Environment and setup for camera payload testing}{28}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Environment and setup for radio payload testing}{29}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Environment and setup for satellite basic operations testing}{29}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.4}Environment and setup for satellite operational scenario testing}{29}{subsubsection.3.3.4}
+\contentsline {section}{\numberline {4}Results and Discussion}{32}{section.4}
+\contentsline {subsection}{\numberline {4.1}Executed tests}{32}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}Tests for camera payload}{32}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Tests for radio payload}{34}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Tests for basic satellite operations}{36}{subsubsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.4}Tests for operational scenarios of the satellite}{39}{subsubsection.4.1.4}
+\contentsline {subsection}{\numberline {4.2}Release version of CubeSatAutomation test library}{39}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Developing operational scenario tests as requirement for CubeSat mission readiness}{39}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Further lessons learned from testing of Suomi100 CubeSat}{39}{subsection.4.4}
+\contentsline {section}{\numberline {5}Conclusions}{41}{section.5}
+\contentsline {section}{References}{43}{section*.11}
+\contentsline {section}{\numberline {A}Esimerkki liitteest\"a}{44}{appendix.A}
+\contentsline {section}{\numberline {B}Toinen esimerkki liitteest\"a}{48}{appendix.B}

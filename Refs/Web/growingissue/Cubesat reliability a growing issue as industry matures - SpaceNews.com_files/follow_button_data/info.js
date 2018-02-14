@@ -1,0 +1,1 @@
+/**/__twttr.setFollowersCountAndFollowing([{"following":false,"id":"31098756","screen_name":"SpaceNews_Inc","name":"SpaceNews","protected":false,"followers_count":44634,"formatted_followers_count":"44.6K followers","age_gated":false}]);
