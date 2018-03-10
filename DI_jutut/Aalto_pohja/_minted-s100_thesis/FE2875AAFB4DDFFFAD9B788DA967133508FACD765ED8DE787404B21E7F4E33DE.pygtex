@@ -1,0 +1,115 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/NanoCam.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Client Start}\PYG{p}{   }\PYG{l+s}{None}\PYG{p}{    }\PYG{l+s}{/home/petri/s100/EGSE/csp\PYGZhy{}client\PYGZhy{}v1.1/build/csp\PYGZhy{}client}\PYG{p}{  }\PYG{l+s}{\PYGZhy{}a 10 \PYGZhy{}z localhost}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}\PYG{p}{   }\PYG{l+s}{None}
+
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Come from eclipse \PYGZhy{} Verify charging}
+\PYG{p}{    [}\PYG{k+kn}{Documentation}\PYG{p}{]                 }\PYG{l+s}{Day in the life operations}
+\PYG{p}{    [}\PYG{k+kn}{Tags}\PYG{p}{]                          }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{    }\PYG{n+nf}{Wait and Notify}\PYG{p}{                 }\PYG{l+s}{Coming from eclipse}\PYG{p}{     }\PYG{l+s}{5}\PYG{p}{   }\PYG{l+s}{/resources/notify.wav}
+\PYG{p}{    }\PYG{n+nf}{Notify After}\PYG{p}{                    }\PYG{l+s}{Going to eclipse}\PYG{p}{        }\PYG{l+s}{600}\PYG{p}{     }\PYG{l+s}{/resources/notify2.wav}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{                 }\PYG{l+s}{Unknown}
+\PYG{p}{    }\PYG{n+nf}{Clear Replies}\PYG{p}{                   }\PYG{l+s}{All}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{reboot 1}\PYG{p}{   }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Sleep}\PYG{p}{                           }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{rdpopt 5 30000 16000 1 2000 3}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Setting}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{           }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{gssbcsp addr 6}\PYG{p}{     }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{gssbcsp interstage sensors}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Panel}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{      }\PYG{l+s}{Coarse Sunsensor: 0}\PYG{p}{     }\PYG{c}{\PYGZsh{} These to 0 when we use the simulator}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{gssbcsp addr 7}\PYG{p}{     }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{gssbcsp interstage sensors}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Panel}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{      }\PYG{l+s}{Coarse Sunsensor: 0}\PYG{p}{     }\PYG{c}{\PYGZsh{} These to 0 when we use the simulator}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{eps hk}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Voltage}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{eps hksub vi}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{    }\PYG{l+s}{Vbatt}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{          }\PYG{l+s}{Vbatt}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{          }\PYG{l+s}{Isun}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{          }\PYG{l+s}{Isys}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{      }\PYG{l+s}{boost[1] 0mV}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{      }\PYG{l+s}{boost[2] 0mV}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{ftp server 1}\PYG{p}{       }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Run Keyword And Ignore error}\PYG{p}{    }\PYG{l+s}{Persistent Command}\PYG{p}{    }\PYG{l+s}{ftp rm /flash/hk\PYGZus{}robot.dat}\PYG{p}{         }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{No such file}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 19}\PYG{p}{       }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set col\PYGZus{}en 1}\PYG{p}{         }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set store\PYGZus{}en 1}\PYG{p}{           }\PYG{l+s}{error}\PYG{p}{  }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{         }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 18}\PYG{p}{           }\PYG{l+s}{error}\PYG{p}{  }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set bcn\PYGZus{}interval 10 10 10}\PYG{p}{        }\PYG{l+s}{error}\PYG{p}{  }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{         }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{  }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{           }\PYG{l+s}{error}
+
+\PYG{c}{\PYGZsh{} Add ADCS commands}
+
+\PYG{g+gu}{Come from eclipse \PYGZhy{} Take image}
+\PYG{p}{    [}\PYG{k+kn}{Documentation}\PYG{p}{]                 }\PYG{l+s}{Day in the life operations}
+\PYG{p}{    [}\PYG{k+kn}{Tags}\PYG{p}{]                          }\PYG{l+s}{OPMODE\PYGZhy{}IMAGING}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{                 }\PYG{l+s}{Communicating}
+\PYG{p}{    }\PYG{n+nf}{Clear Replies}\PYG{p}{                   }\PYG{l+s}{All}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{   }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam download 1 19}\PYG{p}{   }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam set col\PYGZus{}en 0}\PYG{p}{    }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam set store\PYGZus{}en 0}\PYG{p}{  }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam send}\PYG{p}{            }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 18}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set bcn\PYGZus{}interval 0 0 0}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{                }\PYG{l+s}{error}\PYG{p}{       }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{adcs server 1 20}\PYG{p}{       }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{adcs ephem tle new}\PYG{p}{     }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{adcs run start}\PYG{p}{         }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{adcs set nadir}\PYG{p}{         }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{cmp route\PYGZus{}set 6 1000 8 1 CAN}\PYG{p}{  }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Success}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{cam snap \PYGZhy{}a}\PYG{p}{   }\PYG{l+s}{Snap error}\PYG{p}{  }\PYG{l+s}{All}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{cam store test.jpg}\PYG{p}{    }\PYG{l+s}{error}\PYG{p}{    }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{error}
+
+\PYG{g+gu}{Come from eclipse \PYGZhy{} Record radio signals}
+\PYG{p}{    [}\PYG{k+kn}{Documentation}\PYG{p}{]                 }\PYG{l+s}{Day in the life operations}
+\PYG{p}{    [}\PYG{k+kn}{Tags}\PYG{p}{]                          }\PYG{l+s}{OPMODE\PYGZhy{}LOWOBS}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{                 }\PYG{l+s}{Communicating}
+\PYG{p}{    }\PYG{n+nf}{Clear Replies}\PYG{p}{                   }\PYG{l+s}{All}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{adcs run fullstop}\PYG{p}{     }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 19}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set col\PYGZus{}en 1}\PYG{p}{        }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set store\PYGZus{}en 1}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{                }\PYG{l+s}{error}\PYG{p}{       }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 18}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{       }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set bcn\PYGZus{}interval 10 10 10}\PYG{p}{       }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{                    }\PYG{l+s}{error}\PYG{p}{       }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{           }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Write Command}\PYG{p}{                    }\PYG{l+s}{radio operation /flash/radio\PYGZus{}params.cfg /flash/radio\PYGZus{}props.cfg 2 0;0;0;0;0;0;0;}
+\PYG{p}{    }\PYG{n+nf}{Sleep}\PYG{p}{                            }\PYG{l+s}{120}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{error}
+
+\PYG{g+gu}{Come from eclipse \PYGZhy{} Downlink data}
+\PYG{p}{    [}\PYG{k+kn}{Documentation}\PYG{p}{]                 }\PYG{l+s}{Day in the life operations}
+\PYG{p}{    [}\PYG{k+kn}{Tags}\PYG{p}{]                          }\PYG{l+s}{OPMODE\PYGZhy{}COMM}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{                 }\PYG{l+s}{Communicating}
+\PYG{p}{    }\PYG{n+nf}{Clear Replies}\PYG{p}{                   }\PYG{l+s}{All}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{rdpopt 6 30000 16000 1 2000 3}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Setting}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam download 1 19}\PYG{p}{    }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam set col\PYGZus{}en 0}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam set store\PYGZus{}en 0}\PYG{p}{   }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                   }\PYG{l+s}{rparam send}\PYG{p}{             }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 18}\PYG{p}{       }\PYG{l+s}{error}\PYG{p}{      }\PYG{l+s}{Wrote}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam set bcn\PYGZus{}interval 0 0 0}\PYG{p}{      }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{Result}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{               }\PYG{l+s}{rparam send}\PYG{p}{                }\PYG{l+s}{error}\PYG{p}{               }\PYG{l+s}{REP}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{ftp server 1}\PYG{p}{          }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{              }\PYG{l+s}{ftp download\PYGZus{}file /flash/data/m2\PYGZus{}debug.dat m2\PYGZus{}debug.dat}\PYG{p}{     }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}\PYG{p}{      }\PYG{l+s}{45}\PYG{p}{    }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{hk get 0 10 10 0 /flash/hk\PYGZus{}robot.dat}\PYG{p}{      }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{                    }\PYG{l+s}{ftp server 1}\PYG{p}{          }\PYG{l+s}{error}
+\PYG{p}{    }\PYG{n+nf}{Persistent Command}\PYG{p}{              }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk\PYGZus{}robot.dat hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{error}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}\PYG{p}{  }\PYG{l+s}{45}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Time Event}\PYG{p}{           }\PYG{l+s}{Going to eclipse}\PYG{p}{    }\PYG{l+s}{600}
+\PYG{p}{    }\PYG{n+nf}{Parse HK}\PYG{p}{                        }\PYG{l+s}{hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{None}\PYG{p}{    }\PYG{l+s}{True}\PYG{p}{    }\PYG{l+s}{hk\PYGZus{}plot1.png}\PYG{p}{    }\PYG{l+s}{timestamps}\PYG{p}{  }\PYG{l+s}{eps\PYGZus{}hk\PYGZus{}vbatt}
+\PYG{p}{    }\PYG{n+nf}{Parse HK}\PYG{p}{                        }\PYG{l+s}{hk\PYGZus{}robot.dat}\PYG{p}{  }\PYG{l+s}{None}\PYG{p}{    }\PYG{l+s}{True}\PYG{p}{    }\PYG{l+s}{hk\PYGZus{}plot2.png}\PYG{p}{    }\PYG{l+s}{timestamps}\PYG{p}{  }\PYG{l+s}{eps\PYGZus{}hk\PYGZus{}cursys}
+\PYG{p}{    }\PYG{n+nf}{Log}\PYG{p}{                             }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}hk\PYGZus{}plot1.png\PYGZdq{} width=\PYGZdq{}500\PYGZdq{} height=\PYGZdq{}500\PYGZdq{}\PYGZgt{}}\PYG{p}{   }\PYG{l+s}{html=yes}
+\end{Verbatim}
