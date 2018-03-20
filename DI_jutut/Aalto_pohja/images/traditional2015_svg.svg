@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="136mm" height="90mm" viewBox="0 0 13600 9000" version="1.1" xmlns="http://www.w3.org/2000/svg" stroke-width="28.222" stroke-linejoin="round" xml:space="preserve">
+ <path fill="rgb(255,255,255)" stroke="none" d="M 6787,9031 L 0,9031 0,0 13574,0 13574,9031 6787,9031 Z"/>
+ <path fill="rgb(153,0,0)" stroke="none" d="M 6069,897 C 5972,857 5873,820 5773,788 5386,662 4981,598 4573,598 L 4573,4482 4573,4482 4573,4482 6069,897 Z"/>
+ <path fill="rgb(255,66,14)" stroke="none" d="M 7334,1750 C 7186,1601 7026,1463 6855,1339 6612,1162 6348,1014 6069,897 L 4573,4482 4573,4482 4573,4482 7334,1750 Z"/>
+ <path fill="rgb(255,211,32)" stroke="none" d="M 761,5226 C 791,5380 830,5532 879,5681 1005,6069 1191,6434 1430,6764 1670,7094 1960,7384 2290,7624 2620,7863 2985,8049 3373,8175 3760,8301 4165,8366 4573,8366 4981,8366 5386,8301 5773,8175 6161,8049 6526,7863 6855,7624 7185,7384 7475,7094 7715,6764 7954,6434 8140,6069 8266,5681 8392,5294 8457,4889 8457,4482 8457,4074 8392,3669 8266,3282 8140,2894 7954,2529 7715,2199 7599,2040 7472,1890 7334,1750 L 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 761,5226 Z"/>
+ <path fill="rgb(87,157,28)" stroke="none" d="M 4573,598 C 4165,598 3760,662 3373,788 2985,914 2620,1100 2290,1339 1960,1579 1670,1869 1430,2199 1191,2529 1005,2894 879,3282 753,3669 689,4074 689,4482 689,4731 713,4981 761,5226 L 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,4482 4573,598 Z"/>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="353px" font-weight="400"><tspan class="TextPosition" x="4842" y="1226"><tspan fill="rgb(0,0,0)" stroke="none">6.30%</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="353px" font-weight="400"><tspan class="TextPosition" x="5169" y="2992"><tspan fill="rgb(0,0,0)" stroke="none">6.30%</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="353px" font-weight="400"><tspan class="TextPosition" x="5725" y="7399"><tspan fill="rgb(0,0,0)" stroke="none">59.40%</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="353px" font-weight="400"><tspan class="TextPosition" x="1383" y="2761"><tspan fill="rgb(0,0,0)" stroke="none">28.10%</tspan></tspan></tspan></text>
+ <path fill="rgb(153,0,0)" stroke="none" d="M 10218,3816 L 10091,3816 10091,3562 10345,3562 10345,3816 10218,3816 Z"/>
+ <path fill="rgb(255,66,14)" stroke="none" d="M 10218,4367 L 10091,4367 10091,4113 10345,4113 10345,4367 10218,4367 Z"/>
+ <path fill="rgb(255,211,32)" stroke="none" d="M 10218,4917 L 10091,4917 10091,4663 10345,4663 10345,4917 10218,4917 Z"/>
+ <path fill="rgb(87,157,28)" stroke="none" d="M 10218,5468 L 10091,5468 10091,5214 10345,5214 10345,5468 10218,5468 Z"/>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10445" y="3834"><tspan fill="rgb(0,0,0)" stroke="none">DOA</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10445" y="4385"><tspan fill="rgb(0,0,0)" stroke="none">Early loss</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10445" y="4935"><tspan fill="rgb(0,0,0)" stroke="none">Partial mission</tspan></tspan></tspan></text>
+ <text class="TextShape"><tspan class="TextParagraph" font-family="Liberation Sans, sans-serif" font-size="423px" font-weight="400"><tspan class="TextPosition" x="10445" y="5486"><tspan fill="rgb(0,0,0)" stroke="none">Full mission</tspan></tspan></tspan></text>
+</svg>
