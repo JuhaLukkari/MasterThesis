@@ -1,0 +1,160 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}payload\PYGZus{}tests\PYGZus{}rawmode\PYGZus{}5.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Raw Mode \PYGZhy{} 5 Mhz Default parameters}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}RAW}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Raw Mode}\PYG{p}{    }\PYG{l+s}{200}\PYG{p}{   }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{0;5000;100;100000;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Raw Mode}\PYG{p}{    }\PYG{l+s}{200}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m1\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m1\PYGZus{}debug1.dat}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m1\PYGZus{}debug1.dat}\PYG{p}{         }\PYG{l+s}{m1\PYGZus{}debug1.txt}\PYG{p}{  }\PYG{l+s}{m1\PYGZus{}debug1.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m1\PYGZus{}debug1.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+
+\PYG{g+gu}{Raw Mode \PYGZhy{} 5 Mhz 1000000 times}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}RAW}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Raw Mode}\PYG{p}{    }\PYG{l+s}{820}\PYG{p}{   }\PYG{l+s}{25}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{0;5000;100;1000000;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Raw Mode}\PYG{p}{  }\PYG{l+s}{820}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m1\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m1\PYGZus{}debug7.dat}\PYG{p}{     }\PYG{l+s}{260}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m1\PYGZus{}debug7.dat}\PYG{p}{   }\PYG{l+s}{m1\PYGZus{}debug7.txt m1\PYGZus{}debug7.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m1\PYGZus{}debug7.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}payload\PYGZus{}tests\PYGZus{}lowobsmode\PYGZus{}5.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Lowobs Mode \PYGZhy{} 5 Mhz Default parameters, output\PYGZus{}type 3}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}LOWOBS}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Lowobs Mode}\PYG{p}{   }\PYG{l+s}{80}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{0;5000;100;100;100;3;0;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Lowobs Mode 80}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m2\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m2\PYGZus{}debug5.dat}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug5.dat}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug5.txt}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug5.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m2\PYGZus{}debug5.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+
+\PYG{g+gu}{Lowobs Mode \PYGZhy{} 5 Mhz 100 times, 10 points in average}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}LOWOBS}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Lowobs Mode}\PYG{p}{   }\PYG{l+s}{80}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{0;5000;100;10;100;3;0;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Lowobs Mode 80}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m2\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m2\PYGZus{}debug8.dat}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug8.dat}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug8.txt m2\PYGZus{}debug8.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m2\PYGZus{}debug8.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}payload\PYGZus{}tests\PYGZus{}targetmode.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Target Mode \PYGZhy{} Other antenna}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}TARGET}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 0}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Target Mode}\PYG{p}{   }\PYG{l+s}{1420}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{3}\PYG{p}{  }\PYG{l+s}{0;1000;10000;10;10;1000;100;0;0;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Target Mode}\PYG{p}{   }\PYG{l+s}{1420}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{20}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m3\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m3\PYGZus{}debug4.dat}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m3\PYGZus{}debug4.dat}\PYG{p}{         }\PYG{l+s}{m3\PYGZus{}debug4.txt}\PYG{p}{  }\PYG{l+s}{m3\PYGZus{}debug4.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m3\PYGZus{}debug4.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+
+\PYG{g+gu}{Target Mode \PYGZhy{} N\PYGZus{}ave 1000}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio performs several sweeps over the entire frequency range.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}TARGET}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Target Mode}\PYG{p}{   }\PYG{l+s}{1920}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{3}\PYG{p}{  }\PYG{l+s}{0;1000;10000;10;10;1000;1000;3;0;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Target Mode}\PYG{p}{   }\PYG{l+s}{1920}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{20}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m3\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m3\PYGZus{}debug6.dat}\PYG{p}{    }\PYG{l+s}{260}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m3\PYGZus{}debug6.dat}\PYG{p}{         }\PYG{l+s}{m3\PYGZus{}debug6.txt}\PYG{p}{  }\PYG{l+s}{m3\PYGZus{}debug6.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m3\PYGZus{}debug6.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+\end{Verbatim}

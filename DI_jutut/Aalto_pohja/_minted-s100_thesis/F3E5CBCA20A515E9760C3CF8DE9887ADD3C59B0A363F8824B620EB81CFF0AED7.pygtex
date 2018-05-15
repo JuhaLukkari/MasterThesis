@@ -1,0 +1,63 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cp}{\PYGZsh{}ifdef linux}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}fcntl.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}sys/types.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}sys/socket.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}sys/stat.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}include} \PYG{c+cpf}{\PYGZlt{}netinet/in.h\PYGZgt{}}
+\PYG{c+cp}{\PYGZsh{}endif}
+
+\PYG{k+kt}{void} \PYG{o}{*}\PYG{n+nf}{api\PYGZus{}server}\PYG{p}{(}\PYG{k+kt}{void}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+	\PYG{c+c1}{// Here listen for connections}
+	\PYG{c+c1}{// and use command\PYGZus{}run to execute the commands}
+	\PYG{k+kt}{int} \PYG{n}{sockfd}\PYG{p}{,} \PYG{n}{newsockfd}\PYG{p}{;}
+    \PYG{k+kt}{char} \PYG{n}{buffer}\PYG{p}{[}\PYG{l+m+mi}{256}\PYG{p}{];}
+	\PYG{k}{struct} \PYG{n}{sockaddr\PYGZus{}in} \PYG{n}{serv\PYGZus{}addr}\PYG{p}{;}
+	\PYG{n}{sockfd} \PYG{o}{=} \PYG{n}{socket}\PYG{p}{(}\PYG{n}{AF\PYGZus{}INET}\PYG{p}{,} \PYG{n}{SOCK\PYGZus{}STREAM}\PYG{p}{,} \PYG{l+m+mi}{0}\PYG{p}{);}
+	\PYG{k}{if} \PYG{p}{(}\PYG{n}{sockfd} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+        	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ERROR opening socket}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+	\PYG{k}{else}
+		\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Socket started}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{bzero}\PYG{p}{((}\PYG{k+kt}{char} \PYG{o}{*}\PYG{p}{)} \PYG{o}{\PYGZam{}}\PYG{n}{serv\PYGZus{}addr}\PYG{p}{,} \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{serv\PYGZus{}addr}\PYG{p}{));}
+    \PYG{k+kt}{int} \PYG{n}{portno} \PYG{o}{=} \PYG{n}{atoi}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}5000\PYGZdq{}}\PYG{p}{);}
+    \PYG{n}{serv\PYGZus{}addr}\PYG{p}{.}\PYG{n}{sin\PYGZus{}family} \PYG{o}{=} \PYG{n}{AF\PYGZus{}INET}\PYG{p}{;}
+    \PYG{n}{serv\PYGZus{}addr}\PYG{p}{.}\PYG{n}{sin\PYGZus{}addr}\PYG{p}{.}\PYG{n}{s\PYGZus{}addr} \PYG{o}{=} \PYG{n}{INADDR\PYGZus{}ANY}\PYG{p}{;}
+	\PYG{n}{serv\PYGZus{}addr}\PYG{p}{.}\PYG{n}{sin\PYGZus{}port} \PYG{o}{=} \PYG{n}{htons}\PYG{p}{(}\PYG{n}{portno}\PYG{p}{);}
+	\PYG{k}{if} \PYG{p}{(}\PYG{n}{bind}\PYG{p}{(}\PYG{n}{sockfd}\PYG{p}{,} \PYG{p}{(}\PYG{k}{struct} \PYG{n}{sockaddr} \PYG{o}{*}\PYG{p}{)} \PYG{o}{\PYGZam{}}\PYG{n}{serv\PYGZus{}addr}\PYG{p}{,}
+              \PYG{k}{sizeof}\PYG{p}{(}\PYG{n}{serv\PYGZus{}addr}\PYG{p}{))} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+              \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ERROR on binding}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{listen}\PYG{p}{(}\PYG{n}{sockfd}\PYG{p}{,} \PYG{l+m+mi}{5}\PYG{p}{);}
+	\PYG{n}{newsockfd} \PYG{o}{=} \PYG{n}{accept}\PYG{p}{(}\PYG{n}{sockfd}\PYG{p}{,}
+                 \PYG{p}{(}\PYG{k}{struct} \PYG{n}{sockaddr} \PYG{o}{*}\PYG{p}{)} \PYG{n+nb}{NULL}\PYG{p}{,}
+                 \PYG{n+nb}{NULL}\PYG{p}{);}
+     \PYG{k}{if} \PYG{p}{(}\PYG{n}{newsockfd} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{0}\PYG{p}{)}
+        \PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}ERROR on accept}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+	\PYG{k}{while}\PYG{p}{(}\PYG{l+m+mi}{1}\PYG{p}{)}
+	\PYG{p}{\PYGZob{}}
+		\PYG{n}{bzero}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{,} \PYG{l+m+mi}{256}\PYG{p}{);}
+		\PYG{k+kt}{int} \PYG{n}{n} \PYG{o}{=} \PYG{n}{read}\PYG{p}{(}\PYG{n}{newsockfd}\PYG{p}{,} \PYG{n}{buffer}\PYG{p}{,} \PYG{l+m+mi}{255}\PYG{p}{);}  \PYG{c+c1}{//Read messages coming through socket}
+		\PYG{k}{if}\PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZgt{}}\PYG{l+m+mi}{0}\PYG{p}{)}
+		\PYG{p}{\PYGZob{}}
+			\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}SOCKET: Received \PYGZpc{}d bytes:\PYGZpc{}s}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{buffer}\PYG{p}{);}
+			\PYG{n}{command\PYGZus{}run}\PYG{p}{(}\PYG{n}{buffer}\PYG{p}{);}
+			\PYG{n}{write}\PYG{p}{(}\PYG{n}{newsockfd}\PYG{p}{,} \PYG{n}{reply\PYGZus{}buffer}\PYG{p}{,} \PYG{n}{strlen}\PYG{p}{(}\PYG{n}{reply\PYGZus{}buffer}\PYG{p}{));}
+			\PYG{c+c1}{//dup2(old, newsockfd);}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n}{close}\PYG{p}{(}\PYG{n}{newsockfd}\PYG{p}{);}
+	\PYG{n}{printf}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Closed socket\PYGZdq{}}\PYG{p}{);}
+	\PYG{n}{close}\PYG{p}{(}\PYG{n}{sockfd}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k+kt}{int} \PYG{n+nf}{main}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{argc}\PYG{p}{,} \PYG{k+kt}{char} \PYG{o}{*} \PYG{n}{argv}\PYG{p}{[])} \PYG{p}{\PYGZob{}}
+
+    \PYG{c+cm}{/* API */}
+	\PYG{k}{static} \PYG{n}{pthread\PYGZus{}t} \PYG{n}{handle\PYGZus{}api}\PYG{p}{;}
+	\PYG{n}{pthread\PYGZus{}create}\PYG{p}{(}\PYG{o}{\PYGZam{}}\PYG{n}{handle\PYGZus{}api}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{,} \PYG{n}{api\PYGZus{}server}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{);}
+
+	\PYG{c+cm}{/* Wait here for console to end */}
+	\PYG{n}{pthread\PYGZus{}join}\PYG{p}{(}\PYG{n}{handle\PYGZus{}api}\PYG{p}{,} \PYG{n+nb}{NULL}\PYG{p}{);}
+	\PYG{k}{return} \PYG{l+m+mi}{0}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,32 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{*** Test Cases ***}
+\PYG{g+gu}{Download and verify housekeeping}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Call EPS housekeeping routine}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{ftp rm /flash/hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{rparam download 1 19}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{col\PYGZus{}en}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{store\PYGZus{}en}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{hk get 0 1 1 0 /flash/hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk\PYGZus{}robot.dat hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{      }\PYG{l+s}{1/1}
+
+\PYG{g+gu}{Get EPS HK directly}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]       }\PYG{l+s}{Call EPS housekeeping routine directly}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]            }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{       }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{cmp route\PYGZus{}set 2 1000 8 1 I2C}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{eps hk}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{Voltage}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{eps hksub vi}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{Vbatt}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{Isun}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{Isys}
+\end{Verbatim}

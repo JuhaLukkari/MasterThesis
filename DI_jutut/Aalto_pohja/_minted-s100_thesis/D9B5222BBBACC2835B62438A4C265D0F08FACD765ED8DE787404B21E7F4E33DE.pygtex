@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}s100\PYGZus{}keywords.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Keywords ***}
+\PYG{g+gu}{Start Suite}
+\PYG{p}{  }\PYG{n+nf}{Client Start}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Connect Socket}
+
+\PYG{g+gu}{End Suite}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{exit\PYGZus{}client}
+\PYG{p}{  }\PYG{n+nf}{Close Connection}
+\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gu}{Satellite State}
+\PYG{p}{  }\PYG{n+nf}{[Arguments] }\PYG{p}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{state}\PYG{p}{\PYGZcb{}}
+\PYG{p}{  \PYGZdl{}\PYGZob{}}\PYG{n+nv}{state}\PYG{p}{\PYGZcb{}}\PYG{n+nf}{= Convert To Lowercase}\PYG{p}{  \PYGZdl{}\PYGZob{}}\PYG{n+nv}{state}\PYG{p}{\PYGZcb{}}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword If}\PYG{p}{  }\PYG{l+s}{\PYGZsq{}}\PYG{p}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{state}\PYG{p}{\PYGZcb{}}\PYG{l+s}{\PYGZsq{} == \PYGZsq{}idle\PYGZsq{}}
+\PYG{p}{  }\PYG{n+nf}{... Idle}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword If}\PYG{p}{  }\PYG{l+s}{\PYGZsq{}}\PYG{p}{\PYGZdl{}\PYGZob{}}\PYG{n+nv}{state}\PYG{p}{\PYGZcb{}}\PYG{l+s}{\PYGZsq{} == \PYGZsq{}reboot\PYGZsq{}}
+\PYG{p}{  }\PYG{n+nf}{... Reboot}
+
+\PYG{g+gu}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{fp delete telem}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{fp delete beacon}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{radio opmode\PYGZus{}thread\PYGZus{}terminate}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Satellite}
+
+\PYG{g+gu}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{fp delete telem}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{fp delete beacon}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{radio opmode\PYGZus{}thread\PYGZus{}terminate}
+\PYG{p}{  }\PYG{n+nf}{Send Message}\PYG{p}{    }\PYG{l+s}{reboot 2}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{       }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Satellite}
+\end{Verbatim}

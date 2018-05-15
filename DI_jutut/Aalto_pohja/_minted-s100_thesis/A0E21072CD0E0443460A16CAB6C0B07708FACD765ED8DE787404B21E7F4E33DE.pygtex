@@ -1,0 +1,251 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}flight\PYGZus{}planner\PYGZus{}tests.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/NanoCam.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Simple Flight Planner}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Create flight planner command}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Create Flight Plan}\PYG{p}{  }\PYG{l+s}{Ping1}\PYG{p}{   }\PYG{l+s}{ping 1}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Message}\PYG{p}{  }\PYG{l+s}{Reply in}\PYG{p}{  }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{10}
+
+\PYG{g+gu}{Invalid Flight Planner}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Create invalid flight planner command}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{fp delete Ping1}
+\PYG{p}{  }\PYG{n+nf}{Create Flight Plan}\PYG{p}{    }\PYG{l+s}{Ping1}\PYG{p}{   }\PYG{l+s}{ping 1}\PYG{p}{  }\PYG{l+s}{abc}\PYG{p}{   }\PYG{l+s}{def}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{error}
+
+\PYG{g+gu}{Delete Flight Planner}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Delete flight planner command}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{fp delete Ping1}
+\PYG{p}{  }\PYG{n+nf}{Create Flight Plan}\PYG{p}{    }\PYG{l+s}{Ping1}\PYG{p}{   }\PYG{l+s}{ping 1}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{fp delete Ping1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{fp list}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained Not}\PYG{p}{  }\PYG{l+s}{Ping1}
+
+\PYG{g+gu}{Create Larger Flight Planner}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Create flight planner with beacon and a payload command}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{fp delete Ping1}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{hk server 1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{hk server 1 21}
+\PYG{p}{  }\PYG{n+nf}{Create Flight Plan}\PYG{p}{    }\PYG{l+s}{Beacon}\PYG{p}{    }\PYG{l+s}{hk get 0 1 1 0}\PYG{p}{  }\PYG{l+s}{5 5}
+\PYG{p}{  }\PYG{n+nf}{Create Flight Plan}\PYG{p}{    }\PYG{l+s}{Picture}\PYG{p}{   }\PYG{l+s}{cam snap \PYGZhy{}a}\PYG{p}{   }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Message}\PYG{p}{  }\PYG{l+s}{All}
+
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}hk\PYGZus{}tests.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/NanoCam.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Download and verify housekeeping}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Call EPS housekeeping routine}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{ftp rm /flash/hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{rparam download 1 19}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{col\PYGZus{}en}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{store\PYGZus{}en}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{hk get 0 1 1 0 /flash/hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk\PYGZus{}robot.dat hk\PYGZus{}robot.dat}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{      }\PYG{l+s}{1/1}
+
+\PYG{g+gu}{Get NanoComm HK}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Call AX100 housekeeping routine}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{cmp route\PYGZus{}set 5 1000 8 1 CAN}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{ax100 hk}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{last\PYGZus{}contact}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{tot\PYGZus{}tx\PYGZus{}count}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{tot\PYGZus{}rx\PYGZus{}count}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{temp\PYGZus{}brd}
+
+\PYG{g+gu}{Get Telemetries}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Get Telemetries for subsystems}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{     }\PYG{l+s}{Reboot}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{rparam download 1 18}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{col\PYGZus{}obc}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{col\PYGZus{}eps}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{col\PYGZus{}com}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{col\PYGZus{}cam}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{bcn\PYGZus{}interval}\PYG{p}{     }\PYG{l+s}{10 10 10}
+\PYG{p}{    }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{                }\PYG{l+s}{rparam download 1 19}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{col\PYGZus{}en}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{    }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{     }\PYG{l+s}{Nanomind}\PYG{p}{    }\PYG{l+s}{store\PYGZus{}en}\PYG{p}{    }\PYG{l+s}{1}
+\PYG{p}{    }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{    }\PYG{n+nf}{Sleep}\PYG{p}{           }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{  }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{  }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk/tbl\PYGZhy{}021.bin tbl\PYGZhy{}021.bin}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk/tbl\PYGZhy{}022.bin tbl\PYGZhy{}022.bin}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk/tbl\PYGZhy{}025.bin tbl\PYGZhy{}025.bin}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp download\PYGZus{}file /flash/hk/tbl\PYGZhy{}026.bin tbl\PYGZhy{}026.bin}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}
+\PYG{p}{  }\PYG{n+nf}{Parse HK}\PYG{p}{       }\PYG{l+s}{tbl\PYGZhy{}021.bin}
+\PYG{p}{    }\PYG{n+nf}{Parse HK}\PYG{p}{       }\PYG{l+s}{tbl\PYGZhy{}022.bin}
+\PYG{p}{    }\PYG{n+nf}{Parse HK}\PYG{p}{       }\PYG{l+s}{tbl\PYGZhy{}025.bin}
+\PYG{p}{    }\PYG{n+nf}{Parse HK}\PYG{p}{       }\PYG{l+s}{tbl\PYGZhy{}026.bin}
+
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}reboot\PYGZus{}tests.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/NanoCam.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{EPS reboot}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Reboot satellite by rebooting EPS}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 2}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+
+\PYG{g+gu}{OBC reboot}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Reboot nanomind OBC}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+
+\PYG{g+gu}{Shutdown systems and verify their absence}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]     }\PYG{l+s}{Shutdown subsystems}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]          }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{     }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{cmp route\PYGZus{}set 6 1000 8 1 CAN}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{shutdown 6}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{      }\PYG{l+s}{ping 6}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Timeout after}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{cmp route\PYGZus{}set 5 1000 8 1 CAN}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Comm}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{shutdown 5}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{      }\PYG{l+s}{ping 5}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Timeout after}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{reboot 2}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+
+\PYG{g+gu}{Reboot occuring during radio payload operation}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Reboot EPS during payload measurement}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}LOWOBS}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{    }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{0;5000;100;100;100;0;0;}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 2}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+
+\PYG{g+gu}{Reboot occuring during file download}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]     }\PYG{l+s}{Reboot satellite during file transfer}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]          }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{     }\PYG{l+s}{Reboot}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{fp server 1 18}
+\PYG{p}{    }\PYG{n+nf}{Create Flight Plan}\PYG{p}{      }\PYG{l+s}{Reboot}\PYG{p}{   }\PYG{l+s}{reboot 2}\PYG{p}{  }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{      }\PYG{l+s}{ftp download\PYGZus{}file /flash/nanomind.bin nanomind\PYGZus{}down.bin}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Welcome to nanomind}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Timeout}
+
+\PYG{c}{\PYGZsh{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}softupdate\PYGZus{}tests.robot\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+
+\PYG{g+gh}{*** Settings ***}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{String}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/CubeSatAutomation.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/RadioPayload.py}
+\PYG{k+kn}{Library}\PYG{p}{   }\PYG{n+nn}{../libraries/NanoCam.py}
+\PYG{k+kn}{Resource}\PYG{p}{  }\PYG{n+nn}{../resources/s100\PYGZus{}keywords.robot}
+\PYG{k+kn}{Suite Setup}\PYG{p}{   }\PYG{n+nf}{Start Suite}
+\PYG{k+kn}{Suite Teardown}\PYG{p}{  }\PYG{n+nf}{Client Close}
+
+\PYG{g+gh}{*** Test Cases ***}
+
+\PYG{g+gu}{Upload new software and reboot using it}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Upload new software to Nanomind}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}SOFTUPDATE}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{  }\PYG{l+s}{ftp rm /flash/nanomind2.bin}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp upload\PYGZus{}file nanomind2.bin /flash/nanomind2.bin}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}\PYG{p}{    }\PYG{l+s}{45}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{rparam download 1 0}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{swload\PYGZus{}image}\PYG{p}{  }\PYG{l+s}{\PYGZbs{}\PYGZdq{}/flash/nanomind2.bin\PYGZdq{}\PYGZbs{}}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{swload\PYGZus{}count}\PYG{p}{  }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 1}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Ram image}\PYG{p}{   }\PYG{l+s}{45}\PYG{p}{  }\PYG{l+s}{20}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{80}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{radio on 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{radio reply size 1}
+
+\PYG{g+gu}{Upload invalid software image and see that nanomind returns to the default software}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Upload invalid file for software update}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}SOFTUPDATE}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp server 1}
+\PYG{p}{  }\PYG{n+nf}{Run Keyword And Ignore Error}\PYG{p}{  }\PYG{l+s}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp rm /flash/m1\PYGZus{}debug.bin}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{         }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{ftp upload\PYGZus{}file m1\PYGZus{}debug1.dat /flash/m1\PYGZus{}debug.bin}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{100.0\PYGZpc{}}\PYG{p}{    }\PYG{l+s}{45}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{rparam download 1 0}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{swload\PYGZus{}image}\PYG{p}{  }\PYG{l+s}{\PYGZbs{}\PYGZdq{}/flash/m1\PYGZus{}debug.bin\PYGZdq{}\PYGZbs{}}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Nanomind}\PYG{p}{  }\PYG{l+s}{swload\PYGZus{}count}\PYG{p}{  }\PYG{l+s}{3}
+\PYG{p}{  }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{reboot 1}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Booting image in 10 seconds}\PYG{p}{   }\PYG{l+s}{45}\PYG{p}{  }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Message}\PYG{p}{    }\PYG{l+s}{EXCEPTION}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{1 times left}\PYG{p}{  }\PYG{l+s}{180}\PYG{p}{   }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Welcome to nanomind}\PYG{p}{   }\PYG{l+s}{45}\PYG{p}{    }\PYG{l+s}{30}
+\PYG{p}{  }\PYG{n+nf}{Clear Replies}\PYG{p}{         }\PYG{l+s}{All}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{        }\PYG{l+s}{ping 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{    }\PYG{l+s}{Reply in}
+\end{Verbatim}

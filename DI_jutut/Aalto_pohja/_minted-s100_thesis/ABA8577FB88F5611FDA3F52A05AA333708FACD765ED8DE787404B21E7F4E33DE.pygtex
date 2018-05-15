@@ -1,0 +1,21 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{*** Test Cases ***}
+\PYG{g+gu}{Imaging mode \PYGZhy{} Exposure 10000 Gain\PYGZhy{}Target 60}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The onboard camera is used to take images of the Earth.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}IMAGING}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Idle}
+\PYG{p}{  }\PYG{n+nf}{Camera Startup}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Camera}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{    }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{exposure\PYGZhy{}us}\PYG{p}{   }\PYG{l+s}{10000}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{gain\PYGZhy{}target}\PYG{p}{   }\PYG{l+s}{60}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{gain\PYGZhy{}global}\PYG{p}{   }\PYG{l+s}{2048}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{jpeg\PYGZhy{}qual}\PYG{p}{   }\PYG{l+s}{85}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{color\PYGZhy{}correct true}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{gamma\PYGZhy{}correct true}
+\PYG{p}{  }\PYG{n+nf}{Set Satellite Parameter}\PYG{p}{   }\PYG{l+s}{Camera}\PYG{p}{  }\PYG{l+s}{white\PYGZhy{}balance false}
+\PYG{p}{  }\PYG{n+nf}{Send Satellite Parameters}
+\PYG{p}{  }\PYG{n+nf}{Camera Take Picture}\PYG{p}{   }\PYG{l+s}{5000}\PYG{p}{  }\PYG{l+s}{2 def.jpg}\PYG{p}{     }\PYG{l+s}{\PYGZhy{}a}
+\PYG{p}{  }\PYG{n+nf}{Camera Load Picture}\PYG{p}{   }\PYG{l+s}{/mnt/data/images/def.jpg}\PYG{p}{  }\PYG{l+s}{def1.jpg}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}def1.jpg\PYGZdq{} width=\PYGZdq{}500\PYGZdq{} height=\PYGZdq{}500\PYGZdq{}\PYGZgt{} html=yes}
+\end{Verbatim}

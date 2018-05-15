@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{*** Test Cases ***}
+\PYG{g+gu}{EPS reboot}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Reboot satellite by rebooting EPS}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 2}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+
+\PYG{g+gu}{OBC reboot}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{Reboot nanomind OBC}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}POWER}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Unknown}
+\PYG{p}{  }\PYG{n+nf}{Send Command}\PYG{p}{    }\PYG{l+s}{reboot 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Reply Contained}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+
+\PYG{g+gu}{Reboot occuring during file upload}
+\PYG{p}{    [}\PYG{k+kn}{Documentation}\PYG{p}{]         }\PYG{l+s}{Reboot satellite during file transfer}
+\PYG{p}{    [}\PYG{k+kn}{Tags}\PYG{p}{]                  }\PYG{l+s}{OPMODE\PYGZhy{}COM}
+\PYG{p}{    }\PYG{n+nf}{Satellite State}\PYG{p}{         }\PYG{l+s}{Reboot}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{cmp route\PYGZus{}set 1 1000 8 1 KISS}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{fp server 1 18}
+\PYG{p}{    }\PYG{n+nf}{Create Flight Plan}\PYG{p}{      }\PYG{l+s}{Reboot}\PYG{p}{   }\PYG{l+s}{reboot 2}\PYG{p}{  }\PYG{l+s}{30}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{ftp server 1}
+\PYG{p}{    }\PYG{n+nf}{Send Command}\PYG{p}{            }\PYG{l+s}{ftp upload\PYGZus{}file nanomind2.bin /flash/nanomind\PYGZus{}up.bin}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{  }\PYG{l+s}{Welcome to nanomind}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Mount ok}
+\PYG{p}{    }\PYG{n+nf}{Wait Until Reply Contains}\PYG{p}{   }\PYG{l+s}{Timeout}
+\end{Verbatim}

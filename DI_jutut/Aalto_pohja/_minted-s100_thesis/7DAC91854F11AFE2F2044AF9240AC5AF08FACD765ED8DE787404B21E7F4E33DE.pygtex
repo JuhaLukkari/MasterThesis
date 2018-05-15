@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{g+gh}{*** Test Cases ***}
+\PYG{g+gu}{Lowobs Mode \PYGZhy{} 5 Mhz Default parameters}
+\PYG{p}{  [}\PYG{k+kn}{Documentation}\PYG{p}{]   }\PYG{l+s}{The payload radio records signals on a single frequency.}
+\PYG{p}{  [}\PYG{k+kn}{Tags}\PYG{p}{]        }\PYG{l+s}{OPMODE\PYGZhy{}LOWOBS}
+\PYG{p}{  }\PYG{n+nf}{Satellite State}\PYG{p}{   }\PYG{l+s}{Reboot}
+\PYG{p}{  }\PYG{n+nf}{Radio Startup}\PYG{p}{   }\PYG{l+s}{3 0 1}
+\PYG{p}{  }\PYG{n+nf}{Verify Startup}\PYG{p}{    }\PYG{l+s}{Radio}
+\PYG{p}{  }\PYG{n+nf}{Verify Device Detected}\PYG{p}{  }\PYG{l+s}{Radio}\PYG{p}{   }\PYG{l+s}{5}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Status}
+\PYG{p}{  }\PYG{n+nf}{Store Client Responses}\PYG{p}{  }\PYG{l+s}{Lowobs Mode}\PYG{p}{   }\PYG{l+s}{80}\PYG{p}{    }\PYG{l+s}{15}
+\PYG{p}{  }\PYG{n+nf}{Run Radio Mode}\PYG{p}{      }\PYG{l+s}{/flash/radio\PYGZus{}params.cfg}\PYG{p}{  }\PYG{l+s}{/flash/radio\PYGZus{}props.cfg}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{0;5000;100;100;100;0;0;}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{2}
+\PYG{p}{  }\PYG{n+nf}{Get HK}\PYG{p}{      }\PYG{l+s}{30}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{1}\PYG{p}{  }\PYG{l+s}{5}\PYG{p}{  }\PYG{l+s}{2}\PYG{p}{  }\PYG{l+s}{/flash/hk\PYGZus{}test\PYGZus{}lom}
+\PYG{p}{  }\PYG{n+nf}{Send Beacon}\PYG{p}{   }\PYG{l+s}{10}\PYG{p}{  }\PYG{l+s}{4}\PYG{p}{  }\PYG{l+s}{1}
+\PYG{p}{  }\PYG{n+nf}{Sleep}\PYG{p}{     }\PYG{l+s}{10}
+\PYG{p}{  }\PYG{n+nf}{Verify Radio Results}\PYG{p}{  }\PYG{l+s}{Lowobs Mode}\PYG{p}{   }\PYG{l+s}{80}
+\PYG{p}{  }\PYG{n+nf}{Radio Power Down}
+\PYG{p}{  }\PYG{n+nf}{Radio Load Data}\PYG{p}{   }\PYG{l+s}{/flash/data/m2\PYGZus{}debug.dat}\PYG{p}{  }\PYG{l+s}{m2\PYGZus{}debug1.dat}
+\PYG{p}{  }\PYG{n+nf}{Radio Plot Data}\PYG{p}{   }\PYG{l+s}{m2\PYGZus{}debug1.dat}\PYG{p}{         }\PYG{l+s}{m2\PYGZus{}debug1.txt}\PYG{p}{  }\PYG{l+s}{m2\PYGZus{}debug1.png}
+\PYG{p}{  }\PYG{n+nf}{Log}\PYG{p}{   }\PYG{l+s}{\PYGZlt{}img src=\PYGZdq{}m2\PYGZus{}debug1.png\PYGZdq{} width=\PYGZdq{}640\PYGZdq{} height=\PYGZdq{}480\PYGZdq{}\PYGZgt{}}\PYG{p}{  }\PYG{l+s}{html=yes}
+\end{Verbatim}
