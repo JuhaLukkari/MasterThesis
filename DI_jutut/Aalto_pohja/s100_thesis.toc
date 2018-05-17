@@ -15,20 +15,20 @@
 \contentsline {subsection}{\numberline {2.1}CubeSat failures}{4}{subsection.2.1}
 \contentsline {subsubsection}{\numberline {2.1.1}The CubeSat satellite specification}{4}{subsubsection.2.1.1}
 \contentsline {subsubsection}{\numberline {2.1.2}Failure rates of CubeSats}{5}{subsubsection.2.1.2}
-\contentsline {subsubsection}{\numberline {2.1.3}Contribution of different subsystems to satellite failures}{7}{subsubsection.2.1.3}
-\contentsline {subsubsection}{\numberline {2.1.4}Needs for the system level functional testing}{9}{subsubsection.2.1.4}
+\contentsline {subsubsection}{\numberline {2.1.3}Contribution of different subsystems to satellite failures}{8}{subsubsection.2.1.3}
+\contentsline {subsubsection}{\numberline {2.1.4}Needs for system integration level functional testing}{9}{subsubsection.2.1.4}
 \contentsline {subsubsection}{\numberline {2.1.5}Comparison of CubeSat failures to failures with larger spacecraft}{10}{subsubsection.2.1.5}
 \contentsline {subsection}{\numberline {2.2}Satellite testing}{11}{subsection.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Practices for software testing}{11}{subsubsection.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Space industry methodologies}{15}{subsubsection.2.2.2}
-\contentsline {subsection}{\numberline {2.3}Test automation}{16}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Test automation}{17}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {2.3.1}Test automation frameworks}{17}{subsubsection.2.3.1}
 \contentsline {subsubsection}{\numberline {2.3.2}Robot Framework}{17}{subsubsection.2.3.2}
 \contentsline {subsection}{\numberline {2.4}Suomi100 satellite mission}{19}{subsection.2.4}
 \contentsline {subsubsection}{\numberline {2.4.1}Mission requirements}{19}{subsubsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.2}Satellite operation modes}{20}{subsubsection.2.4.2}
+\contentsline {subsubsection}{\numberline {2.4.2}Satellite operation modes}{21}{subsubsection.2.4.2}
 \contentsline {subsubsection}{\numberline {2.4.3}Instrument modes}{22}{subsubsection.2.4.3}
-\contentsline {subsubsection}{\numberline {2.4.4}Automated functional system integration testing}{24}{subsubsection.2.4.4}
+\contentsline {subsubsection}{\numberline {2.4.4}Automated functional system integration testing}{25}{subsubsection.2.4.4}
 \contentsline {section}{\numberline {3}Methods and Setup}{26}{section.3}
 \contentsline {subsection}{\numberline {3.1}Suomi100 satellite}{26}{subsection.3.1}
 \contentsline {subsubsection}{\numberline {3.1.1}Subsystems}{27}{subsubsection.3.1.1}
@@ -40,23 +40,23 @@
 \contentsline {subsubsection}{\numberline {3.2.2}Python libraries}{35}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Robot framework test suites}{39}{subsubsection.3.2.3}
 \contentsline {subsection}{\numberline {3.3}Test setups and environment simulation}{39}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Camera payload testing}{39}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.1}Camera payload testing}{40}{subsubsection.3.3.1}
 \contentsline {subsubsection}{\numberline {3.3.2}Radio payload testing}{40}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Satellite basic operations testing}{42}{subsubsection.3.3.3}
+\contentsline {subsubsection}{\numberline {3.3.3}Satellite basic operations testing}{41}{subsubsection.3.3.3}
 \contentsline {subsubsection}{\numberline {3.3.4}Operational scenario testing, "Day in the life"}{42}{subsubsection.3.3.4}
 \contentsline {section}{\numberline {4}Results and Discussion}{45}{section.4}
 \contentsline {subsection}{\numberline {4.1}Executed tests}{45}{subsection.4.1}
 \contentsline {subsubsection}{\numberline {4.1.1}Camera payload}{45}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Radio payload}{47}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.2}Radio payload}{48}{subsubsection.4.1.2}
 \contentsline {subsubsection}{\numberline {4.1.3}Satellite basic operations}{52}{subsubsection.4.1.3}
 \contentsline {subsubsection}{\numberline {4.1.4}"Day in the life" operational scenarios}{57}{subsubsection.4.1.4}
-\contentsline {subsection}{\numberline {4.2}Release version of CubeSatAutomation test library}{60}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2}Release version of CubeSatAutomation test library}{59}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}Improving CubeSat reliability: "Day in the life of a CubeSat" test}{62}{subsection.4.3}
 \contentsline {subsubsection}{\numberline {4.3.1}Test design}{63}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Improved requirements and operational specifications}{64}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.2}Improved requirements and operational specifications}{63}{subsubsection.4.3.2}
 \contentsline {section}{\numberline {5}Conclusions}{67}{section.5}
 \contentsline {section}{References}{69}{section*.50}
 \contentsline {section}{\numberline {A}CubeSatAutomation function library}{75}{appendix.A}
-\contentsline {section}{\numberline {B}Socket API for CSP client}{88}{appendix.B}
-\contentsline {section}{\numberline {C}Robot Framework test suites}{90}{appendix.C}
-\contentsline {section}{\numberline {D}Robot Framework Test Results}{108}{appendix.D}
+\contentsline {section}{\numberline {B}API for CSP client}{86}{appendix.B}
+\contentsline {section}{\numberline {C}Robot Framework test suites}{88}{appendix.C}
+\contentsline {section}{\numberline {D}Robot Framework Test Results}{106}{appendix.D}

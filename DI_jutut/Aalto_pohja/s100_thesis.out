@@ -15,7 +15,7 @@
 \BOOKMARK [3][-]{subsubsection.2.1.1}{The CubeSat satellite specification}{subsection.2.1}% 15
 \BOOKMARK [3][-]{subsubsection.2.1.2}{Failure rates of CubeSats}{subsection.2.1}% 16
 \BOOKMARK [3][-]{subsubsection.2.1.3}{Contribution of different subsystems to satellite failures}{subsection.2.1}% 17
-\BOOKMARK [3][-]{subsubsection.2.1.4}{Needs for the system level functional testing}{subsection.2.1}% 18
+\BOOKMARK [3][-]{subsubsection.2.1.4}{Needs for system integration level functional testing}{subsection.2.1}% 18
 \BOOKMARK [3][-]{subsubsection.2.1.5}{Comparison of CubeSat failures to failures with larger spacecraft}{subsection.2.1}% 19
 \BOOKMARK [2][-]{subsection.2.2}{Satellite testing}{section.2}% 20
 \BOOKMARK [3][-]{subsubsection.2.2.1}{Practices for software testing}{subsection.2.2}% 21
@@ -56,6 +56,6 @@
 \BOOKMARK [1][-]{section.5}{Conclusions}{}% 56
 \BOOKMARK [1][-]{section*.50}{References}{}% 57
 \BOOKMARK [1][-]{appendix.A}{CubeSatAutomation function library}{}% 58
-\BOOKMARK [1][-]{appendix.B}{Socket API for CSP client}{}% 59
+\BOOKMARK [1][-]{appendix.B}{API for CSP client}{}% 59
 \BOOKMARK [1][-]{appendix.C}{Robot Framework test suites}{}% 60
 \BOOKMARK [1][-]{appendix.D}{Robot Framework Test Results}{}% 61
